@@ -70,7 +70,7 @@ Hint:                   proc "c" (target: u32, mode: u32);
 LineWidth:              proc "c" (width: f32);
 PointSize:              proc "c" (size: f32);
 PolygonMode:            proc "c" (face: u32, mode: u32);
-Scissor:                proc "c" (x: i32, y: i32, auto_cast width: i32, auto_cast height: i32);
+Scissor:                proc "c" (auto_cast x: i32, auto_cast y: i32, auto_cast width: i32, auto_cast height: i32);
 TexParameterf:          proc "c" (target: u32, pname: u32, param: f32);
 TexParameterfv:         proc "c" (target: u32, pname: u32, params: ^f32);
 TexParameteri:          proc "c" (target: u32, pname: u32, param: i32);
