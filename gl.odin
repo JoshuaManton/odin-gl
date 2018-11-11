@@ -70,7 +70,7 @@ Hint:                   proc "c" (target: u32, mode: u32);
 LineWidth:              proc "c" (width: f32);
 PointSize:              proc "c" (size: f32);
 PolygonMode:            proc "c" (face: u32, mode: u32);
-Scissor:                proc "c" (x: i32, y: i32, width: i32, height: i32);
+Scissor:                proc "c" (x: i32, y: i32, auto_cast width: i32, auto_cast height: i32);
 TexParameterf:          proc "c" (target: u32, pname: u32, param: f32);
 TexParameterfv:         proc "c" (target: u32, pname: u32, params: ^f32);
 TexParameteri:          proc "c" (target: u32, pname: u32, param: i32);
@@ -1651,7 +1651,7 @@ load_compute_file :: proc(filename: string) -> (u32, bool) {
     defer delete(cs_data);
 
     // Create the shaders
-    compute_shader_id, ok1 := compile_shader_from_source(string(cs_data), COMPUTE_SHADER);
+    compute_shader_id, ok1 := compile_shader_from_source(string(cs_data), Shader_Type.COMPUTE_SHADER);
 
     if !ok1 {
         return 0, false;
@@ -1874,7 +1874,7 @@ get_uniforms_from_program :: proc(program: u32) -> (uniforms: Uniforms) {
     GetProgramiv(program, ACTIVE_UNIFORMS, &uniform_count);
 
     if uniform_count > 0 do reserve(&uniforms, int(uniform_count));
-    
+
     for i in 0..uniform_count-1 {
         using uniform_info: Uniform_Info;
 
